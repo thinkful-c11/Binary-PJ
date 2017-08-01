@@ -112,3 +112,39 @@ class BinarySearchTree {
     return this.left._findMin();
   }
 }
+
+const keyValue = (str) => {
+  let arrayOfWords = [];
+  for(let i = 0; i < str.length; i++) {
+    arrayOfWords.push([str[i], str.charCodeAt(i)]);
+  }
+  return arrayOfWords;
+};
+
+// console.log(keyValue('EASYQUESTION'));
+//arr = 
+// [ [ 'E', 69 ],
+//   [ 'A', 65 ],
+//   [ 'S', 83 ],
+//   [ 'Y', 89 ],
+//   [ 'Q', 81 ],
+//   [ 'U', 85 ],
+//   [ 'E', 69 ],
+//   [ 'S', 83 ],
+//   [ 'T', 84 ],
+//   [ 'I', 73 ],
+//   [ 'O', 79 ],
+//   [ 'N', 78 ] ]
+
+const easyQuestion = (arr) => {
+  let tree = new BinarySearchTree();
+
+  for(let i = 0; i < arr.length; i++) {
+    tree.insert(arr[i][1], arr[i][0]);
+  }
+
+  return tree;
+};
+
+console.log(easyQuestion(keyValue('EASYQUESTION')));
+
