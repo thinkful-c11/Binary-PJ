@@ -1,7 +1,7 @@
 'use strict';
 
 class BinarySearchTree {
-  constructor(key=null, value=null, parent=null) {
+  constructor(key = null, value = null, parent = null) {
     this.key = key;
     this.value = value;
     this.parent = parent;
@@ -13,20 +13,16 @@ class BinarySearchTree {
     if (this.key == null) {
       this.key = key;
       this.value = value;
-    }
-    else if (key < this.key) {
+    } else if (key < this.key) {
       if (this.left == null) {
         this.left = new BinarySearchTree(key, value, this);
-      }
-      else {
+      } else {
         this.left.insert(key, value);
       }
-    }
-    else {
+    } else {
       if (this.right == null) {
         this.right = new BinarySearchTree(key, value, this);
-      }
-      else {
+      } else {
         this.right.insert(key, value);
       }
     }
@@ -35,14 +31,11 @@ class BinarySearchTree {
   get(key) {
     if (this.key == key) {
       return this.value;
-    }
-    else if (key < this.key && this.left) {
+    } else if (key < this.key && this.left) {
       return this.left.get(key);
-    }
-    else if (key > this.key && this.right) {
+    } else if (key > this.key && this.right) {
       return this.right.get(key);
-    }
-    else {
+    } else {
       throw new Error('Key Error');
     }
   }
@@ -54,24 +47,18 @@ class BinarySearchTree {
         this.key = successor.key;
         this.value = successor.value;
         successor.remove(successor.key);
-      }
-      else if (this.left) {
+      } else if (this.left) {
         this._replaceWith(this.left);
-      }
-      else if (this.right) {
+      } else if (this.right) {
         this._replaceWith(this.right);
-      }
-      else {
+      } else {
         this._replaceWith(null);
       }
-    }
-    else if (key < this.key && this.left) {
+    } else if (key < this.key && this.left) {
       this.left.remove(key);
-    }
-    else if (key > this.key && this.right) {
+    } else if (key > this.key && this.right) {
       this.right.remove(key);
-    }
-    else {
+    } else {
       throw new Error('Key Error');
     }
   }
@@ -80,23 +67,20 @@ class BinarySearchTree {
     if (this.parent) {
       if (this == this.parent.left) {
         this.parent.left = node;
-      }
-      else if (this == this.parent.right) {
+      } else if (this == this.parent.right) {
         this.parent.right = node;
       }
 
       if (node) {
         node.parent = this.parent;
       }
-    }
-    else {
+    } else {
       if (node) {
         this.key = node.key;
         this.value = node.value;
         this.left = node.left;
         this.right = node.right;
-      }
-      else {
+      } else {
         this.key = null;
         this.value = null;
         this.left = null;
@@ -115,14 +99,14 @@ class BinarySearchTree {
 
 const keyValue = (str) => {
   let arrayOfWords = [];
-  for(let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i++) {
     arrayOfWords.push([str[i], str.charCodeAt(i)]);
   }
   return arrayOfWords;
 };
 
 // console.log(keyValue('EASYQUESTION'));
-//arr = 
+//arr =
 // [ [ 'E', 69 ],
 //   [ 'A', 65 ],
 //   [ 'S', 83 ],
@@ -139,12 +123,24 @@ const keyValue = (str) => {
 const easyQuestion = (arr) => {
   let tree = new BinarySearchTree();
 
-  for(let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     tree.insert(arr[i][1], arr[i][0]);
   }
 
   return tree;
 };
 
-console.log(easyQuestion(keyValue('EASYQUESTION')));
+//console.log('testing', easyQuestion(keyValue('EASYQUESTION')).left);
 
+const findHeight = (tree) => {
+  let lCount = 0;
+  let rCount = 0;
+  if (!tree) {
+    return 0;
+  }
+  lCount = findHeight(tree.left) + 1;
+  rCount = findHeight(tree.right) + 1;
+  return Math.max(lCount, rCount);
+};
+
+console.log(findHeight(easyQuestion(keyValue('EASYQUESTION'))));
