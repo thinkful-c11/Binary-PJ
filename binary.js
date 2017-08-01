@@ -149,6 +149,17 @@ const easyQuestion = (arr) => {
 console.log(easyQuestion(keyValue('EASYQUESTION')));
 
 
+const findHeight = (tree) => {
+  let lCount = 0;
+  let rCount = 0;
+  if (!tree) {
+    return 0;
+  }
+  lCount = findHeight(tree.left) + 1;
+  rCount = findHeight(tree.right) + 1;
+  return Math.max(lCount, rCount);
+};
 
+console.log(findHeight(easyQuestion(keyValue('EASYQUESTION'))));
 
 
