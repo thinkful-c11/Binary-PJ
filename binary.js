@@ -146,20 +146,39 @@ const easyQuestion = (arr) => {
   return tree;
 };
 
-console.log(easyQuestion(keyValue('EASYQUESTION')));
+// console.log(easyQuestion(keyValue('EASYQUESTION')));
 
 
 const findHeight = (tree) => {
-  let lCount = 0;
-  let rCount = 0;
   if (!tree) {
     return 0;
   }
-  lCount = findHeight(tree.left) + 1;
-  rCount = findHeight(tree.right) + 1;
+
+  let lCount = findHeight(tree.left) + 1;
+  let rCount = findHeight(tree.right) + 1;
   return Math.max(lCount, rCount);
 };
 
-console.log(findHeight(easyQuestion(keyValue('EASYQUESTION'))));
+// console.log(findHeight(easyQuestion(keyValue('EASYQUESTION'))));
 
+// Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates
 
+const isBST = (tree) => {
+
+  if(tree) {
+    if(!isBST(tree.left)) {
+      return false;
+    } 
+
+    if(tree.right && tree.right.key < tree.key) {
+      return false;
+    } 
+    return isBST(tree.right);
+  }
+
+  return true;
+
+};//closes function
+
+console.log('this should be true', isBST(easyQuestion(keyValue('EASYQUESTION'))));//true;
+console.log('this should be true', isBST(easyQuestion(keyValue('EQY'))));//true;
